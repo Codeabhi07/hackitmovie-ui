@@ -28,7 +28,7 @@ export default function Movie() {
   const [reload,setReload]=useState(false);
   const [bookingId,setBookingId]=useState(0);
 
-  const AppURL="http://localhost:8080";
+  const AppURL="https://hackitmovie.herokuapp.com";
   const showsData=[{showId:1,showTime:'09:15 AM'},
   {showId:2,showTime:'12:15 PM'},
   {showId:3,showTime:'03:15 PM'},
