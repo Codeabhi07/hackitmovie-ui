@@ -10,7 +10,7 @@ export default function Modal(props) {
   const handleConfirm = () => {
     props.setIsLoading(true);
     const json=JSON.stringify(inputs);
-    const url = "http://localhost:8080/api/v1/confirmBooking";
+    const url = "https://hackitmovie.herokuapp.com/api/v1/confirmBooking";
     const config = {
       headers: { 'bookingid': props.id,
       'Content-Type' : 'application/json' }
