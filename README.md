@@ -2,7 +2,7 @@
 
 Steps to build and run the project:
 
-1) Clone repo and swtich to master branch.
+1) Clone repo and switch to master branch.
 
 2) Run 
 ### `npm install`
