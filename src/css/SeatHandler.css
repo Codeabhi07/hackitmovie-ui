@@ -1,0 +1,80 @@
+.App {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 2;
+}
+
+.Cinema {
+  margin-bottom: 18px;
+  perspective: 400px;
+
+  display: grid;
+  place-items: center;
+  grid-gap: 24px;
+}
+
+.screen {
+  height: 70px;
+  max-width: 400px;
+  border-radius: 5px;
+  background: rgb(218, 218, 218);
+  width: 100%;
+  transform: rotateX(-30deg) scale(1.2);
+  box-shadow: -4px -2px 8px 4px rgb(112, 111, 111);
+  margin-bottom: 60px;
+  margin-top: 30px;
+  text-align: center;
+  opacity: 0.6;
+}
+
+.seat {
+  box-shadow: inset 0 0 0 2px rgba(13, 147, 236, 0.6);
+  border-radius: 8px;
+  background: rgba(255, 255, 255);
+}
+
+.headerKey{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 10px;
+  font-family: "Times New Roman";
+}
+
+.seatingKey { 
+  display: flex;
+  margin-left: auto;
+  margin-right: 0;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+.showKey{
+  margin-left: 0;
+  margin-right: auto;
+  padding-left: 20px;
+}
+
+.seat--reserved {
+  background: rgb(187, 184, 184);
+  box-shadow: inset 0 0 0 2px rgba(187, 184, 184, 0.6);
+  color: rgb(187, 184, 184);
+}
+
+.seat--selected {
+  background-color: rgba(13, 147, 236);
+  border-radius: 8px;
+}
+
+.seat-picker {
+  margin: auto;
+}
+
+.seat-picker__row__number {
+  color: black;
+}
