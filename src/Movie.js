@@ -4,7 +4,8 @@ import SeatHandler from "./components/SeatHandler";
 import Modal from "./components/ConfirmationModal";
 import axios from "axios";
 import Loading from "./components/Loading";
-import { NotificationManager } from 'react-notifications';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
+import "react-notifications/lib/notifications.css";
 import {
   Outer,
   Background,
@@ -28,6 +29,7 @@ export default function Movie() {
   const [reload,setReload]=useState(false);
   const [bookingId,setBookingId]=useState(0);
 
+  //const AppURL="http://localhost:8080";
   const AppURL="https://hackitmovie.herokuapp.com";
   const showsData=[{showId:1,showTime:'09:15 AM'},
   {showId:2,showTime:'12:15 PM'},
@@ -50,11 +52,12 @@ export default function Movie() {
            .post(url, json, config)
            .then((response) => {
              setBookingId(response.data);
-             console.log(response.data);
              setShow(true);
+             NotificationManager.info("Please Confirm Your Booking","Booking Started!",2000);
+             
            })
-           .catch((error) => {
-             console.log(error);
+           .catch((e) => {
+             NotificationManager.error("Please Refresh Your View","Seat Not Available!",2000);
            });
   };
 
@@ -62,10 +65,8 @@ export default function Movie() {
     setShow(false);
     setSelected([]);
     setBookingId(null);
-    setTimeout(() => {
-    setIsLoading(false);
-    }, 2000);
     setReload(()=> !reload);
+    
   };
   
   const handleCancel = () => {
@@ -77,11 +78,14 @@ export default function Movie() {
        axios
            .get(url,config)
            .then((response) => {
-             console.log(response);
              handleClose();
+             setTimeout(() => {
+              NotificationManager.success(response.data,"Success!",2000); 
+             }, 3000);
+             
            })
-           .catch((error) => {
-             console.log(error);
+           .catch((e) => {
+             NotificationManager.error(e,"Error Occurred!",2000);
            });           
   };
 
@@ -97,8 +101,8 @@ export default function Movie() {
           setIsLoading(false);
         }, 2000);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((e) => {
+        NotificationManager.error(e,"Error Occurred!",2000);
       });
   }, [reload]);
 
@@ -139,6 +143,7 @@ export default function Movie() {
             )}
           </RightContainer>
           <Modal show={show} onClose={handleClose} onCancel={handleCancel} id={bookingId} setIsLoading={setIsLoading}/>
+          <NotificationContainer />
         </Container>
       )}
     </Outer>

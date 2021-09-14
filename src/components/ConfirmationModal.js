@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Details from "./UserDetails";
 import "../css/Modal.css";
 import axios from "axios";
+import { NotificationManager } from "react-notifications";
+import "react-notifications/lib/notifications.css";
 
 export default function Modal(props) {
   const initialData = { name: "", email: "" };
@@ -10,6 +12,7 @@ export default function Modal(props) {
   const handleConfirm = () => {
     props.setIsLoading(true);
     const json=JSON.stringify(inputs);
+    //const url="http://localhost:8080/api/v1/confirmBooking"
     const url = "https://hackitmovie.herokuapp.com/api/v1/confirmBooking";
     const config = {
       headers: { 'bookingid': props.id,
@@ -19,21 +22,19 @@ export default function Modal(props) {
        axios
            .post(url,json,config)
            .then((response) => {
-             console.log(response.data);
+            
+            props.onClose();
+            setInputs(initialData);
+            setTimeout(() => {
+              NotificationManager.success(response.data,"Success!",2000);
+             }, 3000);
+            
              
-             props.onClose();
-             setInputs(initialData);
-             props.setIsLoading(false);
            })
            .catch((error) => {
-             console.log(error);
+            NotificationManager.error("Please Refresh Your View","Seat Not Available!",2000);
            });           
 
-
-    // alert(`User Created!
-    //        Name: ${inputs.name}
-    //        Email: ${inputs.email}`);
-    
   };
 
   const handleInputChange = (event) => {
